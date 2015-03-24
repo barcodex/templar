@@ -1,0 +1,28 @@
+{
+    "name": "barcodex/templar",
+    "type": "library",
+    "description": "Template processor wrapper for Temple",
+    "homepage": "http://www.tilpy.com",
+    "license": "MIT",
+    "authors": [
+        {"name": "Anvarzon Zurajev", "email": "anvarzon.zurajev@gmail.com"}
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://wpackagist.org"
+        },
+        {
+            "type": "vcs",
+            "url": "https://bitbucket.org/barcodex/temple.git"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "barcodex/temple": "*"
+    },
+    "autoload": {
+        "psr-0": { "Templar\\": "lib/" }
+    },
+    "minimum-stability": "dev"
+}
