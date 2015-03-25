@@ -1,5 +1,5 @@
 {
-    "name": "barcodex/templar",
+    "name": "barcodex/kasha-templar",
     "type": "library",
     "description": "Template processor wrapper for Temple",
     "homepage": "http://www.tilpy.com",
@@ -22,7 +22,7 @@
         "barcodex/temple": "*"
     },
     "autoload": {
-        "psr-0": { "Templar\\": "lib/" }
+        "psr-0": { "Kasha\\": "lib/" }
     },
     "minimum-stability": "dev"
 }
