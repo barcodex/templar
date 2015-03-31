@@ -1,5 +1,5 @@
 {
-    "name": "barcodex/kasha-templar",
+    "name": "barcodex/templar",
     "type": "library",
     "description": "Template processor wrapper for Temple",
     "homepage": "http://www.tilpy.com",
