@@ -4,7 +4,8 @@ namespace Kasha\Core;
 
 class Config
 {
-	private static $instance = array();
+	/** @var Config */
+	private static $instance = null;
 
 	private $config = array();
 
@@ -16,4 +17,13 @@ class Config
 
 		return self::$instance;
 	}
+
+	public function get($name, $default = null) {
+		return \Temple\Util::lavnn($name, $this->config, $default);
+	}
+
+	public function set($name, $value) {
+		return $this->config[$name] = $value;
+	}
+
 }

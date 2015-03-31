@@ -20,11 +20,11 @@ class Session
 
 	public static function set($name, $value)
 	{
-		self::$instance->set(str_replace('.', '/', $name), $value);
+		self::getInstance()->set(str_replace('.', '/', $name), $value);
 	}
 
 	public static function get($name, $default = null)
 	{
-		self::$instance->get(str_replace('.', '/', $name), $default);
+		return self::getInstance()->get(str_replace('.', '/', $name), $default);
 	}
 }

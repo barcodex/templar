@@ -1,5 +1,7 @@
 <?php
 
+require_once "vendor/autoload.php";
+
 use Kasha\Generator\AppGenerator;
 
 //print_r($argv);
@@ -11,8 +13,6 @@ if ($argc == 1) {
 } else {
 	$scriptName = array_shift($argv);
 	$commandName = array_shift($argv);
-	print_r($argv);
-
 	switch ($commandName) {
 		case 'create:app':
 			createApp($argv);

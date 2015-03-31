@@ -10,9 +10,9 @@ class TextProcessor
 {
     public static function doTemplate($moduleName, $templateName, $params)
     {
-        Locator::getInstance()->setFolders(Config::getInstance()->getFolders()); // @TODO set automatically
+        Locator::getInstance()->setFolders(Config::getInstance()->get('folders')); // @TODO set automatically
         $templateText = Locator::getInstance()->getTemplate($moduleName, $templateName);
 
         return Processor::doText($templateText, $params);
     }
-} 
+}
