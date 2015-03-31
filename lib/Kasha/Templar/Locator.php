@@ -158,7 +158,6 @@ class Locator
      *
      * @param string $moduleName
      * @param string $templateName
-     * @param string $skinName
      *
      * @return string
      */
@@ -242,4 +241,4 @@ class Locator
         return file_put_contents($this->getFolderPath('shared') . $filePath, $contents);
     }
 
-} 
+}
