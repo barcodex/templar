@@ -11,4 +11,7 @@ Locator::getInstance()->setFolders($folders);
 Locator::getInstance()->setLanguage('en');
 
 $params = array('name' => array('first' => 'John', 'last' => 'Doe'));
+
+// to run the test, create a file app/modules/main/templates/index.html
+//  and use {{name.first}} and {{name.last|uppercase}} placeholders in its HTML
 print TextProcessor::doTemplate('main', 'index', $params) . PHP_EOL;
