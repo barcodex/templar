@@ -2,7 +2,6 @@
 
 namespace Kasha\Templar;
 
-use Kasha\Core\Session;
 use Temple\Util;
 
 /**
@@ -15,6 +14,7 @@ class Locator
     static $instance = null;
 
     private $folders = array(); // expected keys: 'app', 'shared'; paths should end with a slash
+	private $language = 'en';
 
     private $cache = null;
     private $translator = null;
@@ -32,9 +32,24 @@ class Locator
         $this->folders = $folders;
     }
 
+    public function getFolders()
+    {
+        return $this->folders;
+    }
+
     public function getFolderPath($name)
     {
         return Util::lavnn($name, $this->folders, '');
+    }
+
+    public function setLanguage($language)
+    {
+		$this->language = $language;
+    }
+
+    public function getLanguage()
+    {
+        return $this->language;
     }
 
     /**
@@ -153,19 +168,23 @@ class Locator
         return $sqlTemplate;
     }
 
-    /**
-     * Gets HTML template addressed by module and template name (and, optionally, skin prefix)
-     *
-     * @param string $moduleName
-     * @param string $templateName
-     *
-     * @return string
-     */
+	/**
+	 * Gets HTML template addressed by module and template name (and, optionally, skin prefix)
+	 *
+	 * @param string $moduleName
+	 * @param string $templateName
+	 * @param null string $language
+	 *
+	 * @return string
+	 */
     public function getTemplate(
         $moduleName,
-        $templateName
+        $templateName,
+		$language = null
     ) {
-        $language = Session::get('language.code', 'en');
+		if (is_null($language)) {
+			$language = $this->language;
+		}
         $key = "$moduleName:$templateName:$language";
         // First, try to find a translated template in the cache
         $cached = $this->getCachedTemplate($key);
