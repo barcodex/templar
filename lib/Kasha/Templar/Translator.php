@@ -11,8 +11,14 @@ class Translator
         $this->translationFolder = $translationFolder;
     }
 
-    public function translateTemplate($untranslated, $moduleName, $templateName)
+    public function translateTemplate($untranslated, $moduleName, $templateName, $language = null)
     {
-        return $untranslated;
+		// $translations is expected to be an array
+		$translations = Locator::getInstance()->getTemplateTranslation($moduleName, $templateName, $language);
+		if (is_array($translations)) {
+			$translations = array();
+		}
+
+        return TextProcessor::doTextVariation($untranslated, '[[', ']]', $translations);
     }
-} 
+}

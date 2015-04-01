@@ -132,9 +132,36 @@ class Locator
         }
     }
 
-    public static function getAppModulePath($moduleName)
+	public function getTemplateTranslation(
+		$moduleName,
+		$fileName,
+		$language = null
+	) {
+		if (is_null($language)) {
+			$language = $this->getLanguage();
+		}
+		$fileName = $this->getFolderPath('app') . "modules.translation/$language/$moduleName/$fileName.txt";
+		if (file_exists($fileName)) {
+			$json = file_get_contents($fileName);
+		} else {
+			// @TODO throw and exception if in the strict mode
+			$json = '';
+		}
+
+		return json_decode($json, true);
+	}
+
+	public static function getAppModulePath($moduleName)
     {
         return self::getInstance()->getFolderPath('app') . "modules/$moduleName/";
+    }
+
+    public static function getAppModuleTranslationPath($moduleName, $language = null)
+    {
+		if (is_null($language)) {
+			$language = self::getInstance()->getLanguage();
+		}
+		return self::getInstance()->getFolderPath('app') . "modules.translation/$language/$moduleName/";
     }
 
     public static function getAppModuleFilePath($moduleName, $fileName)
