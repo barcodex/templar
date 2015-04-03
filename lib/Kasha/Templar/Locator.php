@@ -169,6 +169,11 @@ class Locator
         return self::getInstance()->getFolderPath('app') . "modules/$moduleName/$fileName";
     }
 
+    public static function getSharedModuleFilePath($moduleName, $fileName)
+    {
+        return self::getInstance()->getFolderPath('shared') . "modules/$moduleName/$fileName";
+    }
+
     /**
      * Gets SQL template addressed by module and template name
      *

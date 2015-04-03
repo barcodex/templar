@@ -5,12 +5,19 @@ namespace Kasha\Templar;
 use Temple\Processor;
 
 class TextProcessor
-    extends Processor
+	extends Processor
 {
-    public static function doTemplate($moduleName, $templateName, $params)
-    {
-        $templateText = Locator::getInstance()->getTemplate($moduleName, $templateName);
+	public static function doTemplate($moduleName, $templateName, $params)
+	{
+		$templateText = Locator::getInstance()->getTemplate($moduleName, $templateName);
 
-        return Processor::doText($templateText, $params);
-    }
+		return Processor::doText($templateText, $params);
+	}
+
+	public static function loopTemplate($moduleName, $templateName, $rows)
+	{
+		$templateText = Locator::getInstance()->getTemplate($moduleName, $templateName);
+
+		return Processor::loopText($templateText, $rows);
+	}
 }
