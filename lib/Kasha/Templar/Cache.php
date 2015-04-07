@@ -22,7 +22,20 @@ class Cache
     {
         $fileName = $this->cacheFolder . $key . '.txt';
 
-        return file_exists($fileName) ? file_get_contents($fileName) : '';
+		// check if all folders in the path exist for the $key
+		$pathFolders = explode('/', $key);
+		if (count($pathFolders) > 1) {
+			$pureKeyName = array_pop($pathFolders); // do not create folder for the last element
+			$path = $this->cacheFolder;
+			foreach ($pathFolders as $folderName) {
+				$path .= ($folderName . '/');
+				if (!file_exists($path)) {
+					mkdir($path);
+				}
+			}
+		}
+
+		return file_exists($fileName) ? file_get_contents($fileName) : '';
     }
 
     public function set($key, $content)

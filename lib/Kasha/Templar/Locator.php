@@ -224,8 +224,7 @@ class Locator
             // Get template text, translated into the session language
             $translated = $this->translateTemplate($moduleName, $templateName);
             // Cache translated template (depends on environment configuration)
-//            $this->setCachedTemplate($key, $translated);
-
+            $this->setCachedTemplate($key, $translated);
             return $translated;
         } else {
             // @TODO throw and exception if in the strict mode
@@ -233,25 +232,42 @@ class Locator
         }
     }
 
-    private function getCachedTemplate($key)
+	/**
+	 * @param $key
+	 *
+	 * @return string
+	 */
+	private function getCachedTemplate($key)
     {
+		// using of 'templates' folder makes the built-in Cache class compatible with Kasha|Caching\Cache
         if (is_null($this->cache)) {
-            $this->cache = new Cache($this->getFolderPath('cache'));
+            $this->cache = new Cache($this->getFolderPath('cache') . 'templates/');
         }
 
         return $this->cache->get($key);
     }
 
-    private function setCachedTemplate($key, $content)
+	/**
+	 * @param $key
+	 * @param $content
+	 */
+	private function setCachedTemplate($key, $content)
     {
+		// using of 'templates' folder makes the built-in Cache class compatible with Kasha|Caching\Cache
         if (is_null($this->cache)) {
-            $this->cache = new Cache($this->getFolderPath('cache'));
+            $this->cache = new Cache($this->getFolderPath('cache') . 'templates/');
         }
 
         $this->cache->set($key, $content);
     }
 
-    private function translateTemplate($moduleName, $templateName)
+	/**
+	 * @param $moduleName
+	 * @param $templateName
+	 *
+	 * @return string
+	 */
+	private function translateTemplate($moduleName, $templateName)
     {
         $untranslated = $this->getModuleFile($moduleName, "templates/$templateName.html");
 
@@ -262,32 +278,64 @@ class Locator
         return $this->translator->translateTemplate($untranslated, $moduleName, $templateName);
     }
 
-    public function appFileExists($filePath)
+	/**
+	 * @param $filePath
+	 *
+	 * @return bool
+	 */
+	public function appFileExists($filePath)
     {
         return file_exists($this->getFolderPath('app') . $filePath);
     }
 
-    public function sharedFileExists($filePath)
+	/**
+	 * @param $filePath
+	 *
+	 * @return bool
+	 */
+	public function sharedFileExists($filePath)
     {
         return file_exists($this->getFolderPath('shared') . $filePath);
     }
 
-    public function appFileGetContents($filePath)
+	/**
+	 * @param $filePath
+	 *
+	 * @return string
+	 */
+	public function appFileGetContents($filePath)
     {
         return file_get_contents($this->getFolderPath('app') . $filePath);
     }
 
-    public function sharedFileGetContents($filePath)
+	/**
+	 * @param $filePath
+	 *
+	 * @return string
+	 */
+	public function sharedFileGetContents($filePath)
     {
         return file_get_contents($this->getFolderPath('shared') . $filePath);
     }
 
-    public function appFilePutContents($filePath, $contents)
+	/**
+	 * @param $filePath
+	 * @param $contents
+	 *
+	 * @return int
+	 */
+	public function appFilePutContents($filePath, $contents)
     {
         return file_put_contents($this->getFolderPath('app') . $filePath, $contents);
     }
 
-    public function sharedFilePutContents($filePath, $contents)
+	/**
+	 * @param $filePath
+	 * @param $contents
+	 *
+	 * @return int
+	 */
+	public function sharedFilePutContents($filePath, $contents)
     {
         return file_put_contents($this->getFolderPath('shared') . $filePath, $contents);
     }
