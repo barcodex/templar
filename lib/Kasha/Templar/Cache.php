@@ -1,8 +1,10 @@
 <?php
 
-namespace Kasha\Templar;
+namespace Kasha\Templar; // @TODO either rename namespace to Templar or the project to kasha-templar
 
 use Temple\Util;
+
+// @TODO shall we use kasha-caching, like kasha-model? It would make sense, but brings another dependency
 
 /**
  * Class Cache
@@ -43,4 +45,5 @@ class Cache
         $fileName = $this->cacheFolder . $key . '.txt';
         file_put_contents($fileName, $content);
     }
+
 }
